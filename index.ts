@@ -1,25 +1,19 @@
 import nodemailer from 'nodemailer';
+import dontenv from 'dotenv';
 
-let transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false, // true for 465, false for other ports
+dontenv.config();
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
   auth: {
-    user: "maddison53@ethereal.email",
-    pass: "jn7jnAPss4f63QBp6D",
+    user: process.env.EMAIL,
+    pass: process.env.PASS
   },
 });
 
-let mailOptions = {
-    from: 'maddison53@ethereal.email',
-    to: 'dirfanardika@gmail.com',
-    subject: 'Test Email from Node.js',
-    text: 'This is a test email sent from a Node.js app!'
-};
-
 (async () => {
   const info = await transporter.sendMail({
-    from: '"Maddison Foo Koch" <maddison53@ethereal.email>',
+    from: '"Test Message" <techglimpse.email@gmail.com>',
     to: "bar@example.com, baz@example.com, dirfanardika@gmail.com",
     subject: "Hello ✔",
     text: "Hello world?", // plain‑text body
@@ -28,3 +22,5 @@ let mailOptions = {
 
   console.log("Message sent:", info.messageId);
 })();
+
+
