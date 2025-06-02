@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import dontenv from 'dotenv';
+import emailTemplate from './template/newsMessage';
 
 dontenv.config();
 
@@ -14,10 +15,10 @@ const transporter = nodemailer.createTransport({
 (async () => {
   const info = await transporter.sendMail({
     from: '"Test Message" <techglimpse.email@gmail.com>',
-    to: "bar@example.com, baz@example.com, dirfanardika@gmail.com",
+    to: "odeardika.app@gmail.com",
     subject: "Hello ✔",
     text: "Hello world?", // plain‑text body
-    html: "<b>Hello world?</b>", // HTML body
+    html: emailTemplate(), // HTML body
   });
 
   console.log("Message sent:", info.messageId);
